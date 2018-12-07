@@ -1,20 +1,14 @@
-//console.log('hello world');
-var express = require('express')
-var app = express()
+const puppeteer = require('puppeteer');
 
-var router = express.Router();
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://google.com');
+  //await page.waitForNavigation()
+  await page.waitForSelector('.gLFyf')
+  await page.type('.gLFyf', 'pechugas')
+  await page.screenshot({path: 'example.png'});
 
-var controller = require('./src/controllers/default');
-router.get('/', controller.default );
-router.get('/fuck', controller.new );
-app.use(require('express-status-monitor')());
-app.use('/', router);
-
-// respond with "hello world" when a GET request is made to the homepage
-/*
-app.get('/', function (req, res) {
-  res.send('hello world')
-})
-*/
-
-app.listen(3000, () => console.log("test"));
+  await browser.close();
+  console.log('the end')
+})();

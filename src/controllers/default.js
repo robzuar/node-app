@@ -1,8 +1,8 @@
 module.exports = {
-  default: function(req, res) {
+  default: (req, res) => {
     res.send('Hello Klowzuar')
   },
-  new: function(req, res){
+  new: (req, res) => {
       res.send('go fuck yourself')
   }
 }
